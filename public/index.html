@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f5f0">
+  <title>SkinWise AI — Your skin, understood</title>
+  <meta name="description" content="AI cosmetic skin insights, skincare recommendations and visual progress tracking.">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="SkinWise AI home">
+      <span class="brand-icon">✳</span>
+      <span>skinwise<span class="brand-ai">.ai</span></span>
+    </a>
+    <span class="secure-label"><span class="status-dot"></span> AI SKIN STUDIO</span>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="#home"><span aria-hidden="true">⌂</span> Home</a>
+      <a href="#analyze"><span aria-hidden="true">◎</span> Analyze</a>
+      <a href="#gallery"><span aria-hidden="true">▧</span> Gallery</a>
+      <a href="#dashboardSection"><span aria-hidden="true">▥</span> Analytics</a>
+      <a href="#routine"><span aria-hidden="true">♡</span> Routine</a>
+      <a href="#about"><span aria-hidden="true">✳</span> About</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="eyebrow"><span></span> PERSONALIZED SKINCARE STARTS HERE</div>
+      <h1>Your skin.<br><span>Understood.</span></h1>
+      <p class="hero-copy">Explore AI-generated cosmetic insights, discover a routine that fits your goals, and visualize your skin-analysis history.</p>
+      <div class="hero-tags">
+        <span>✳ Skin insights</span>
+        <span>♡ Thoughtful routines</span>
+        <span>⌁ Progress dashboard</span>
+      </div>
+    </section>
+
+    <section class="workspace" id="analyze">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">01 / YOUR SKIN CHECK-IN</p>
+          <h2>Let's meet your skin</h2>
+        </div>
+        <span class="step-count">STEP 1 OF 3</span>
+      </div>
+
+      <div class="analysis-grid">
+        <div class="upload-panel">
+          <div class="upload-top">
+            <span class="mini-icon">◎</span>
+            <span class="panel-label">YOUR PHOTO</span>
+          </div>
+
+          <label class="dropzone" id="dropzone" for="photo">
+            <img id="preview" alt="Preview of your selected photo" hidden>
+            <div class="upload-placeholder" id="uploadPlaceholder">
+              <span class="upload-symbol">＋</span>
+              <strong>Choose your selfie</strong>
+              <span>Tap to take a selfie or choose a photo from your device</span>
+              <span class="file-types">JPG or PNG · Under 10 MB</span>
+            </div>
+          </label>
+
+          <div class="photo-choice-buttons" style="display:flex;gap:10px;flex-wrap:wrap;margin:12px 0;">
+            <button type="button" id="takeSelfieButton" class="secondary-button">Take a Selfie</button>
+            <button type="button" id="chooseExistingPhotoButton" class="secondary-button">Choose Existing Photo</button>
+          </div>
+
+          <input id="photo" type="file" accept="image/jpeg,image/png" hidden>
+
+          <div class="photo-tips">
+            <strong>For the best results</strong>
+            <ul>
+              <li>Face the camera directly</li>
+              <li>Use bright, even lighting</li>
+              <li>Keep your face clear and uncovered</li>
+            </ul>
+          </div>
+
+          <button class="primary-button" id="analyzeButton" disabled>
+            <span>Analyze my skin</span><span aria-hidden="true">↗</span>
+          </button>
+          <p class="privacy-note">Your photo is sent to the analysis service. A small thumbnail may be saved in this browser for your history; avoid shared devices.</p>
+        </div>
+
+        <div class="insight-panel">
+          <div class="insight-top">
+            <div>
+              <p class="section-kicker">YOUR PERSONAL SKIN SPACE</p>
+              <h3>Small steps, clearer insights.</h3>
+            </div>
+            <span class="sparkle">✳</span>
+          </div>
+          <div class="insight-art" aria-hidden="true">
+            <div class="orbit orbit-one"></div>
+            <div class="orbit orbit-two"></div>
+            <div class="art-center">
+              <span class="art-flower">✳</span>
+              <span>SKIN<br>FIRST</span>
+            </div>
+            <span class="art-star star-one">✧</span>
+            <span class="art-star star-two">✦</span>
+            <span class="art-star star-three">·</span>
+          </div>
+          <div class="insight-bottom">
+            <span class="insight-number">01</span>
+            <div>
+              <strong>Knowledge over guesswork</strong>
+              <p>Explore cosmetic insights as a starting point, not a diagnosis.</p>
+            </div>
+          </div>
+          <div class="insight-bottom">
+            <span class="insight-number">02</span>
+            <div>
+              <strong>Progress at your pace</strong>
+              <p>Compare repeated check-ins taken under similar lighting.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="results-section" id="resultsSection" hidden>
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">02 / YOUR RESULTS</p>
+          <h2>Your skin insights</h2>
+        </div>
+        <span class="result-badge">✳ ANALYSIS COMPLETE</span>
+      </div>
+      <p class="results-intro">Scores below are reported by YouCam AI. Their meaning depends on the API's scoring definitions; they are not medical diagnoses.</p>
+      <div class="score-grid" id="scoreGrid"></div>
+
+      <section class="dashboard-section" id="dashboardSection">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">03 / VISUAL ANALYTICS</p>
+            <h2>Your analysis dashboard</h2>
+          </div>
+        </div>
+        <p class="results-intro">Choose a saved photo to view its score distribution and comparison. The trend graph uses your saved analyses.</p>
+
+        <div class="dashboard-toolbar">
+          <label for="analysisPicker">Photo to visualize</label>
+          <select id="analysisPicker"></select>
+          <span id="historyCount" class="history-count"></span>
+        </div>
+
+        <section class="progress-summary" aria-labelledby="progressSummaryTitle">
+          <div class="progress-summary-heading">
+            <div>
+              <p class="section-kicker">YOUR SKIN JOURNEY</p>
+              <h3 id="progressSummaryTitle">Skin Progress Summary</h3>
+            </div>
+            <span id="progressUpdated" class="history-count">No check-ins yet</span>
+            <button type="button" id="downloadReportBtn" class="pdf-report-button">
+              Download PDF Report
+            </button>
+          </div>
+          <p class="pdf-export-help">
+            To save your report, choose “Save as PDF” in your browser’s print options.
+          </p>
+          <p id="progressMessage" class="progress-message" aria-live="polite">
+            Complete an analysis to start tracking your check-ins.
+          </p>
+          <div id="progressGrid" class="progress-grid"></div>
+        </section>
+
+        <section class="pdf-history-panel" aria-labelledby="pdfHistoryTitle">
+          <div class="pdf-history-heading">
+            <div>
+              <p class="section-kicker">YOUR SAVED REPORTS</p>
+              <h3 id="pdfHistoryTitle">PDF Report History</h3>
+            </div>
+            <span id="pdfReportHistoryCount" class="history-count">0 reports</span>
+          </div>
+          <p class="pdf-history-intro">
+            Review report requests or regenerate a print-ready report from a saved analysis.
+          </p>
+          <p id="pdfReportHistoryEmpty" class="pdf-history-empty">
+            No report requests recorded yet. Prepare a report to start your history.
+          </p>
+          <div id="pdfReportHistoryList" class="pdf-history-list"></div>
+          <button type="button" id="clearPdfReportHistoryBtn"
+            class="pdf-history-clear" hidden>Clear report history</button>
+        </section>
+
+        <div class="chart-grid">
+          <article class="chart-card">
+            <h3>Score distribution</h3>
+            <p>Pie chart · selected photo</p>
+            <div class="chart-wrap"><canvas id="pieChart" aria-label="Pie chart of scores for the selected photo"></canvas></div>
+            <div id="pieLegend" class="chart-legend"></div>
+          </article>
+          <article class="chart-card">
+            <h3>Metric comparison</h3>
+            <p>Bar chart · selected photo</p>
+            <div class="chart-wrap"><canvas id="barChart" aria-label="Bar chart comparing cosmetic scores"></canvas></div>
+          </article>
+          <article class="chart-card chart-wide">
+            <h3>Analysis over time</h3>
+            <p>Line graph · each saved photo is one check-in</p>
+            <div class="chart-wrap line-chart-wrap"><canvas id="lineChart" aria-label="Line chart of reported scores over saved analyses"></canvas></div>
+            <p class="chart-footnote">A change in a score is not automatically an improvement or decline. Lighting, pose and other factors can affect comparisons.</p>
+          </article>
+        </div>
+
+                <section class="skin-comparison-panel" id="skinComparison"
+          aria-labelledby="skinComparisonTitle">
+          <div class="skin-comparison-heading">
+            <div>
+              <p class="section-kicker">YOUR SKIN JOURNEY</p>
+              <h3 id="skinComparisonTitle">Compare two check-ins</h3>
+            </div>
+            <span class="comparison-icon" aria-hidden="true">↔</span>
+          </div>
+
+          <p class="skin-comparison-intro">
+            Choose two saved analyses to compare their cosmetic scores over time.
+          </p>
+
+          <div class="comparison-selectors">
+            <div class="comparison-field">
+              <label for="comparisonOlder">Earlier check-in</label>
+              <select id="comparisonOlder"></select>
+            </div>
+            <div class="comparison-field">
+              <label for="comparisonNewer">Later check-in</label>
+              <select id="comparisonNewer"></select>
+            </div>
+          </div>
+
+          <p id="comparisonMessage" class="comparison-message" aria-live="polite">
+            Save at least two analyses to compare your scores.
+          </p>
+
+          <div id="comparisonResults" class="comparison-results"></div>
+
+          <p class="comparison-footnote">
+            Score changes are descriptive, not a diagnosis or proof of improvement.
+            Differences in lighting, pose and capture conditions can affect results.
+          </p>
+        </section>
+
+<div class="history-panel" id="gallery">
+          <div class="history-heading">
+            <div>
+              <p class="section-kicker">YOUR SAVED CHECK-INS</p>
+              <h3>Photo history</h3>
+            </div>
+            <button type="button" class="text-button" id="clearHistoryButton">Clear history</button>
+          </div>
+          <p class="chart-footnote">History is stored only in this browser. Up to 10 check-ins are kept. Clearing browser data may remove them.</p>
+          <div id="historyList" class="history-list"></div>
+          <p id="emptyHistory" class="empty-history" hidden>No saved analyses yet. Analyze a photo to start your history.</p>
+        </div>
+      </section>
+
+      <section class="recommendations-section" id="routine">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">04 / YOUR ROUTINE BUILDER</p>
+            <h2>Personalized skincare ideas</h2>
+          </div>
+        </div>
+        <p class="results-intro">Tell us what you want to focus on. We'll suggest general cosmetic routine steps, not diagnose your skin or prescribe treatment.</p>
+
+        <form id="recommendationForm" class="recommendation-form">
+          <div class="form-field">
+            <label for="skinGoal">Main goal</label>
+            <select id="skinGoal">
+              <option value="simple">Build a simple routine</option>
+              <option value="hydration">Support skin hydration</option>
+              <option value="texture">Focus on the look of skin texture</option>
+              <option value="pores">Care for the look of visible pores</option>
+              <option value="blemishes">Care for blemish-prone skin</option>
+              <option value="aging">Support a healthy-looking appearance</option>
+              <option value="sensitive">Keep my routine gentle</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="skinSensitivity">Skin sensitivity</label>
+            <select id="skinSensitivity">
+              <option value="unsure">Not sure</option>
+              <option value="sensitive">Often sensitive or easily irritated</option>
+              <option value="not-sensitive">Not usually sensitive</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="skinBudget">Budget for each product</label>
+            <select id="skinBudget">
+              <option value="low">Budget-friendly</option>
+              <option value="mid">Mid-range</option>
+              <option value="flexible">Flexible budget</option>
+            </select>
+          </div>
+          <button class="primary-button" type="submit">Build my routine ↗</button>
+        </form>
+        <div id="recommendationResults" class="recommendation-results" aria-live="polite">
+          <p class="empty-history">Choose your preferences and tap “Build my routine” to see suggestions.</p>
+        </div>
+      </section>
+
+      <button class="secondary-button" id="newAnalysisButton">Analyze another photo ↗</button>
+    </section>
+
+    <div class="status-message" id="statusMessage" role="status" aria-live="polite" hidden></div>
+
+
+    <section class="about-section" id="about">
+      <div class="about-copy">
+        <p class="section-kicker">A MORE THOUGHTFUL SKINCARE JOURNEY</p>
+        <h2>Meet SkinWise AI</h2>
+        <p class="about-lead">
+          Better skincare decisions begin with understanding your goals
+          and observing your skin thoughtfully over time.
+        </p>
+        <p>
+          SkinWise AI brings cosmetic skin insights, saved photo check-ins,
+          visual charts and general skincare routine ideas together in one space.
+          It is designed to help you explore information—not to diagnose a
+          medical condition.
+        </p>
+      </div>
+
+      <div class="about-features">
+        <article class="about-feature">
+          <span class="about-feature-icon" aria-hidden="true">◎</span>
+          <h3>Understand</h3>
+          <p>Explore cosmetic analysis results and their limitations.</p>
+        </article>
+        <article class="about-feature">
+          <span class="about-feature-icon" aria-hidden="true">▥</span>
+          <h3>Visualize</h3>
+          <p>Review charts and compare check-ins over time.</p>
+        </article>
+        <article class="about-feature">
+          <span class="about-feature-icon" aria-hidden="true">♡</span>
+          <h3>Build a routine</h3>
+          <p>Explore general skincare ideas suited to your preferences.</p>
+        </article>
+      </div>
+
+      <p class="about-privacy">
+        <strong>Your privacy matters.</strong>
+        Photos are sent to the analysis service when you analyze them.
+        Saved history is stored in this browser, as described in the app.
+        Use caution on shared devices.
+      </p>
+    </section>
+
+    <section class="disclaimer">
+      <span>✳</span>
+      <p><strong>A gentle reminder</strong><br>AI skin analysis is for cosmetic information only. It does not diagnose skin conditions or replace advice from a qualified healthcare professional. Seek professional advice for persistent, painful or concerning skin changes.</p>
+    </section>
+  </main>
+
+  <footer>
+    <a class="brand footer-brand" href="/"><span class="brand-icon">✳</span><span>skinwise<span class="brand-ai">.ai</span></span></a>
+    <span>Made for a more thoughtful skincare journey.</span>
+  </footer>
+<script src="/advanced.js?v=4"></script>
+</body>
+</html>

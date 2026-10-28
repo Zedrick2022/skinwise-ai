@@ -1,0 +1,28 @@
+# Dependencies and private configuration
+node_modules/
+.env
+.env.*
+!.env.example
+
+# Uploaded files and logs
+uploads/
+*.log
+npm-debug.log*
+
+# Local project backups
+/backup-before-button-tests/
+/backup-before-redesign/
+/backups/
+*.backup
+*.working-backup
+*.before-*
+*.before-*.html
+*.before-*.css
+*.before-*.js
+
+# Additional local backup copies
+*.bak
+*.save
+*-backup
+*-backup.*
+*backup*
